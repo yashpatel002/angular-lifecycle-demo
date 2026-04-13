@@ -1,0 +1,58 @@
+<div class="lifecycle-container">
+    <h1>🎯 Angular Component Lifecycle Hooks Demo</h1>
+
+    <div class="controls-section">
+        <h2>Parent Component Controls</h2>
+        <div class="control-group">
+            <label>
+                Update Child Title:
+                <input type="text" [(ngModel)]="childTitle" placeholder="Enter title"
+                    (change)="updateTitle(childTitle)" />
+            </label>
+            <button (click)="updateTitle(childTitle)">Update Title</button>
+        </div>
+
+        <div class="control-group">
+            <label>
+                Increment Counter:
+                <button (click)="incrementCount()">Count: {{ childCount }}</button>
+            </label>
+        </div>
+
+        <div class="control-group">
+            <button (click)="toggleChildVisibility()" [class.visible]="childVisible">
+                {{ childVisible ? '❌ Hide' : '✅ Show' }} Child Component
+            </button>
+        </div>
+
+        <button class="clear-btn" (click)="clearLogs()">Clear Logs</button>
+    </div>
+
+    <div class="demo-section">
+        <h2>Child Component Area</h2>
+        <div class="log-info">
+            📏 Change the inputs above to see lifecycle hooks trigger in the logs below
+        </div>
+
+        <div *ngIf="childVisible" class="child-container">
+            <app-lifecycle-child [title]="childTitle" [count]="childCount" (logEvent)="onChildLog($event)">
+                <div class="content-projection">
+                    <h4>🎁 Content Projected from Parent</h4>
+                    <p>This content is projected into the child component using &lt;ng-content&gt;</p>
+                </div>
+            </app-lifecycle-child>
+        </div>
+    </div>
+
+    <div class="logs-section">
+        <h2>📋 Lifecycle Hooks Log</h2>
+        <div class="logs-container">
+            <div *ngIf="logs.length === 0" class="empty-log">
+                👆 Modify inputs above to see hooks being triggered...
+            </div>
+            <div *ngFor="let log of logs" class="log-entry" [ngClass]="getLogClass(log)">
+                {{ log }}
+            </div>
+        </div>
+    </div>
+</div>

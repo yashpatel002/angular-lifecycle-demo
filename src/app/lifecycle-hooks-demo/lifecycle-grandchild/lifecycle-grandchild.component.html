@@ -1,0 +1,22 @@
+<div class="grandchild-component">
+    <div class="grandchild-header">
+        <h4>👶👶 Grandchild Component</h4>
+    </div>
+
+    <div class="grandchild-content">
+        <div class="data-item">
+            <span class="label">Received Data:</span>
+            <span class="value">{{ parentData }}</span>
+        </div>
+
+        <div class="message-item">
+            <input type="text" [(ngModel)]="grandchildMessage" (change)="updateMessage(grandchildMessage)"
+                placeholder="Update grandchild message" />
+            <p><strong>Message:</strong> {{ grandchildMessage }}</p>
+        </div>
+
+        <div class="stats-item">
+            <p><strong>Change Detections:</strong> {{ changeDetectionCount }}</p>
+        </div>
+    </div>
+</div>

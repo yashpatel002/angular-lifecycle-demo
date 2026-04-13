@@ -1,0 +1,55 @@
+<div class="child-component">
+    <div class="child-header">
+        <h3>👶 Child Component</h3>
+        <div class="child-info">
+            <p><strong>Received Title:</strong> {{ title }}</p>
+            <p><strong>Received Count:</strong> {{ count }}</p>
+        </div>
+    </div>
+
+    <div class="child-content">
+        <div class="section">
+            <h4>📤 Inputs from Parent</h4>
+            <div class="input-display">
+                <div class="input-item">
+                    <span class="label">Title:</span>
+                    <span class="value">{{ title }}</span>
+                </div>
+                <div class="input-item">
+                    <span class="label">Count:</span>
+                    <span class="value">{{ count }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h4>📏 Child's Own State</h4>
+            <div class="state-display">
+                <input type="text" [(ngModel)]="childMessage" (change)="updateChildMessage(childMessage)"
+                    placeholder="Update child message" />
+                <p><strong>Current Message:</strong> {{ childMessage }}</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h4>🎁 Content Projection</h4>
+            <div class="content-area">
+                <ng-content></ng-content>
+            </div>
+        </div>
+
+        <div class="section">
+            <h4>👶👶 Grandchild Component (View Child)</h4>
+            <app-lifecycle-grandchild [parentData]="'Data from Child'"
+                (logEvent)="onGrandchildLog($event)"></app-lifecycle-grandchild>
+        </div>
+
+        <div class="section">
+            <h4>📋 Statistics</h4>
+            <div class="stats">
+                <p><strong>Change Detection Cycles:</strong> {{ changeDetectionCount }}</p>
+                <button (click)="forceChangeDetection()">Force Change Detection</button>
+            </div>
+        </div>
+    </div>
+</div>
